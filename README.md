@@ -64,6 +64,24 @@ Preparing for technical and behavioral job interviews is often a lonely, passive
 - Optional local webcam activation (`navigator.mediaDevices.getUserMedia`) to monitor your posture, expressions, and eye contact during practice.
 
 ---
+### Main Dashboard:
+<img width="1902" height="858" alt="Screenshot 2026-07-27 224428" src="https://github.com/user-attachments/assets/1f542598-1b46-4bbd-8a7f-580f0d03172f" />
+
+### Separate Interview preparations for top Companies:
+<img width="1901" height="800" alt="Screenshot 2026-07-27 224600" src="https://github.com/user-attachments/assets/10248be8-8d41-441d-8dfd-0bf13b3b6ecf" />
+
+### Separate portal for reverse Q/A:
+<img width="1895" height="838" alt="Screenshot 2026-07-27 224657" src="https://github.com/user-attachments/assets/5897e6be-b767-4e6a-adb8-395b88b6588d" />
+
+### Separate Coding practices:
+<img width="1902" height="838" alt="Screenshot 2026-07-27 224743" src="https://github.com/user-attachments/assets/812c4d35-4ddc-4d63-9fd3-c6ced1a1e14c" />
+
+### Resume Matcher:
+<img width="1430" height="659" alt="Screenshot 2026-07-27 224811" src="https://github.com/user-attachments/assets/ee60cb0c-2536-4610-83a3-aa6c5a1a6429" />
+
+### Timer and Webcam functionality:
+Even answers can be spoken.
+<img width="1352" height="762" alt="Screenshot 2026-07-27 224847" src="https://github.com/user-attachments/assets/258d8651-5a93-44a4-a17f-b8f9084b06ac" />
 
 ## The AI Features & Prompts
 
