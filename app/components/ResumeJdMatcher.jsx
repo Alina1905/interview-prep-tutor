@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { recordResumeMatched } from "../lib/gamification";
+import { readJsonResponse } from "../lib/fetchJson";
 
 export default function ResumeJdMatcher({ jobDescription, setJobDescription, onStartDrillWithJd, onGamificationUpdate }) {
   const [resumeText, setResumeText] = useState("");
@@ -59,8 +60,7 @@ export default function ResumeJdMatcher({ jobDescription, setJobDescription, onS
         }),
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to analyze match.");
+      const data = await readJsonResponse(res);
 
       setMatchResult(data);
       if (setJobDescription) setJobDescription(localJd);
