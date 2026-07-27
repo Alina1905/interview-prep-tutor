@@ -20,7 +20,7 @@ import Logo from "./components/Logo";
 import { COMPANY_PACKS } from "./data/companyPacks";
 import { downloadSessionPdf } from "./lib/pdfReport";
 import { analyzeSpeech } from "./lib/speechAnalytics";
-import { readJsonResponse } from "./lib/fetchJson";
+import { buildApiPath, readJsonResponse } from "./lib/fetchJson";
 import {
   getGamificationData,
   recordAnswerSubmitted,
@@ -132,12 +132,13 @@ export default function Home() {
     setError("");
     setLoadingQuestions(true);
     try {
-      const res = await fetch("/api/generate-questions", {
+      const endpoint = buildApiPath("/api/generate-questions");
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ jobDescription, difficulty }),
       });
-      const data = await readJsonResponse(res);
+      const data = await readJsonResponse(res, endpoint);
       if (!data.questions || data.questions.length === 0) {
         throw new Error("No questions returned. Try adding more details to the job description.");
       }
@@ -169,7 +170,8 @@ export default function Home() {
 
     try {
       const current = questions[currentIndex];
-      const res = await fetch("/api/evaluate-answer", {
+      const endpoint = buildApiPath("/api/evaluate-answer");
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -182,7 +184,7 @@ export default function Home() {
           targetSeconds: current.targetSeconds,
         }),
       });
-      const data = await readJsonResponse(res);
+      const data = await readJsonResponse(res, endpoint);
 
       const entry = {
         question: current.question,
@@ -220,7 +222,8 @@ export default function Home() {
     setLoadingFollowUp(true);
     try {
       const current = results[currentIndex];
-      const res = await fetch("/api/evaluate-followup", {
+      const endpoint = buildApiPath("/api/evaluate-followup");
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -231,7 +234,7 @@ export default function Home() {
           followUpAnswer,
         }),
       });
-      const data = await readJsonResponse(res);
+      const data = await readJsonResponse(res, endpoint);
 
       setResults((prev) =>
         prev.map((r, i) =>
