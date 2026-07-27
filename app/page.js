@@ -20,6 +20,7 @@ import Logo from "./components/Logo";
 import { COMPANY_PACKS } from "./data/companyPacks";
 import { downloadSessionPdf } from "./lib/pdfReport";
 import { analyzeSpeech } from "./lib/speechAnalytics";
+import { readJsonResponse } from "./lib/fetchJson";
 import {
   getGamificationData,
   recordAnswerSubmitted,
@@ -136,8 +137,7 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ jobDescription, difficulty }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to generate questions.");
+      const data = await readJsonResponse(res);
       if (!data.questions || data.questions.length === 0) {
         throw new Error("No questions returned. Try adding more details to the job description.");
       }
@@ -182,8 +182,7 @@ export default function Home() {
           targetSeconds: current.targetSeconds,
         }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to evaluate answer.");
+      const data = await readJsonResponse(res);
 
       const entry = {
         question: current.question,
@@ -232,8 +231,7 @@ export default function Home() {
           followUpAnswer,
         }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to evaluate follow-up.");
+      const data = await readJsonResponse(res);
 
       setResults((prev) =>
         prev.map((r, i) =>
