@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import VoiceButton from "./VoiceButton";
+import { readJsonResponse } from "../lib/fetchJson";
 
 const SCENARIOS = [
   {
@@ -41,7 +42,7 @@ export default function ReverseQaTrainer() {
           questionType: "technical",
         }),
       });
-      const data = await res.json();
+      const data = await readJsonResponse(res);
       setFeedback(data);
     } catch {
       // ignore
