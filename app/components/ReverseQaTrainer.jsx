@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import VoiceButton from "./VoiceButton";
-import { readJsonResponse } from "../lib/fetchJson";
+import { buildApiPath, readJsonResponse } from "../lib/fetchJson";
 
 const SCENARIOS = [
   {
@@ -31,7 +31,8 @@ export default function ReverseQaTrainer() {
     setFeedback(null);
 
     try {
-      const res = await fetch("/api/evaluate-answer", {
+      const endpoint = buildApiPath("/api/evaluate-answer");
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -42,7 +43,7 @@ export default function ReverseQaTrainer() {
           questionType: "technical",
         }),
       });
-      const data = await readJsonResponse(res);
+      const data = await readJsonResponse(res, endpoint);
       setFeedback(data);
     } catch {
       // ignore
