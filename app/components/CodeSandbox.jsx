@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { readJsonResponse } from "../lib/fetchJson";
 
 const SAMPLE_PROBLEMS = [
   {
@@ -68,8 +69,7 @@ export default function CodeSandbox() {
         }),
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to evaluate code.");
+      const data = await readJsonResponse(res);
       setResult(data);
     } catch (err) {
       setError(err.message);
