@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { readJsonResponse } from "../lib/fetchJson";
+import { buildApiPath, readJsonResponse } from "../lib/fetchJson";
 
 const SAMPLE_PROBLEMS = [
   {
@@ -59,7 +59,8 @@ export default function CodeSandbox() {
     setResult(null);
 
     try {
-      const res = await fetch("/api/evaluate-code", {
+      const endpoint = buildApiPath("/api/evaluate-code");
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -69,7 +70,7 @@ export default function CodeSandbox() {
         }),
       });
 
-      const data = await readJsonResponse(res);
+      const data = await readJsonResponse(res, endpoint);
       setResult(data);
     } catch (err) {
       setError(err.message);
