@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { recordResumeMatched } from "../lib/gamification";
-import { readJsonResponse } from "../lib/fetchJson";
+import { buildApiPath, readJsonResponse } from "../lib/fetchJson";
 
 export default function ResumeJdMatcher({ jobDescription, setJobDescription, onStartDrillWithJd, onGamificationUpdate }) {
   const [resumeText, setResumeText] = useState("");
@@ -51,7 +51,8 @@ export default function ResumeJdMatcher({ jobDescription, setJobDescription, onS
     setLoading(true);
 
     try {
-      const res = await fetch("/api/match-jd", {
+      const endpoint = buildApiPath("/api/match-jd");
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -60,7 +61,7 @@ export default function ResumeJdMatcher({ jobDescription, setJobDescription, onS
         }),
       });
 
-      const data = await readJsonResponse(res);
+      const data = await readJsonResponse(res, endpoint);
 
       setMatchResult(data);
       if (setJobDescription) setJobDescription(localJd);
